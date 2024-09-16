@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BILAN METABOLIQUE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+        body {
+            background-color: #f5f5dc;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn-calculate {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .results-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 60%;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .result-circle {
+            background-color: #008080; /* Vert canard */
+            color: #fff;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .result-title {
+            font-size: 0.7em;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .program-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+            color: #000;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .program-link {
+            display: block;
+            background-color: #008080; /* Vert canard */
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .program-text {
+            font-weight: normal;
+        }
+        .program-text span {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-family: 'Times New Roman', serif;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">BILAN METABOLIQUE</h1>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-group">
+                <label for="sexe">Sexe :</label>
+                <select id="sexe">
+                    <option value="femme">Femme</option>
+                    <option value="homme">Homme</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="age">Âge :</label>
+                <input type="number" id="age">
+            </div>
+            <div class="form-group">
+                <label for="taille">Taille (cm) :</label>
+                <input type="number" id="taille">
+            </div>
+            <div class="form-group">
+                <label for="poids">Poids (kg) :</label>
+                <input type="number" id="poids">
+            </div>
+            <div class="form-group">
+                <label for="activite">Niveau d’activité physique :</label>
+                <select id="activite">
+                    <option value="1.2">Sédentaire</option>
+                    <option value="1.375">Légèrement actif</option>
+                    <option value="1.55">Modérément actif</option>
+                    <option value="1.725">Très actif</option>
+                    <option value="1.9">Extrêmement actif</option>
+                </select>
+            </div>
+            <button class="btn-calculate" onclick="calculer()">Calculer</button>
+        </div>
+        <div class="results-container" id="results-container">
+            <div id="result-metabolisme-base" class="result-circle">
+                <div id="metabolisme-base"></div>
+                <div class="result-title">MB</div>
+            </div>
+            <div id="result-metabolisme-activite" class="result-circle">
+                <div id="metabolisme-activite"></div>
+                <div class="result-title">DET</div>
+            </div>
+            <div id="result-imc" class="result-circle">
+                <div id="imc"></div>
+                <div class="result-title">IMC</div>
+            </div>
+            <div id="result-poids-ideal" class="result-circle">
+                <div id="poids-ideal"></div>
+                <div class="result-title">Poids idéal</div>
+            </div>
+            <div class="program-container" id="program-container">
+                <a id="program-1500" class="program-link" href="https://kcoaching.taplink.ws/d/1500en30jours/">Programme 1500 calories</a>
+                <div class="program-text" id="text-1500"></div>
+                <br>
+                <a id="program-1400" class="program-link" href="https://kcoaching.taplink.ws/d/140014jours/">Programme 1400 calories</a>
+                <div class="program-text" id="text-1400"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">K'COACHING</div>
+    <script>
+        function calculer() {
+            const sexe = document.getElementById('sexe').value;
+            const age = document.getElementById('age').value;
+            const taille = document.getElementById('taille').value;
+            const poids = document.getElementById('poids').value;
+            const activite = document.getElementById('activite').value;
+
+            let metabolismeBase;
+            if (sexe === 'femme') {
+                metabolismeBase = 655 + (9.6 * poids) + (1.8 * taille) - (4.7 * age);
+            } else {
+                metabolismeBase = 66 + (13.7 * poids) + (5 * taille) - (6.8 * age);
+            }
+            metabolismeBase = Math.round(metabolismeBase);
+
+            const metabolismeActivite = Math.round(metabolismeBase * activite);
+            const imc = Math.round(poids / ((taille / 100) ** 2));
+            const poidsIdealFemme = Math.round(taille - 100 - ((taille - 150) / 2.5));
+            const poidsIdealHomme = Math.round(taille - 100 - ((taille - 150) / 4));
+
+            document.getElementById('metabolisme-base').innerText = metabolismeBase + ' Kcal';
+            document.getElementById('metabolisme-activite').innerText = metabolismeActivite + ' Kcal';
+            document.getElementById('imc').innerText = imc;
+            document.getElementById('poids-ideal').innerText = (sexe === 'femme' ? poidsIdealFemme : poidsIdealHomme) + ' Kg';
+
+            const pertePoids1500 = ((metabolismeActivite - 1500) * 30 / 7700).toFixed(1);
+            const pertePoids1400 = ((metabolismeActivite - 1400) * 30 / 7700).toFixed(1);
+
+            document.getElementById('text-1500').innerHTML = `Avec un apport quotidien de 1500 calories ta perte de poids est estimée à <span>${pertePoids1500} kg</span> par mois. Clique sur le titre pour accéder au programme.`;
+            document.getElementById('text-1400').innerHTML = `Avec un apport quotidien de 1400 calories ta perte de poids est estimée à <span>${pertePoids1400} kg</span> par mois. Clique sur le titre pour accéder au programme.`;
+
+            const resultsContainer = document.getElementById('results-container');
+            const programContainer = document.getElementById('program-container');
+            resultsContainer.style.display = 'flex';
+            programContainer.style.display = 'block';
+            setTimeout(() => {
+		resultsContainer.style.opacity = '1';
+                programContainer.style.opacity = '1';
+            }, 100);
+        }
+    </script>
+</body>
+</html>

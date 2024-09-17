@@ -5,135 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BILAN METABOLIQUE</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
+        :root {
+            --main-bg-color: #d4edda;
+            --container-bg-color: #fff;
+            --form-bg-color: #f8f9fa;
+            --button-bg-color: #008080;
+            --button-hover-bg-color: #005f5f;
+            --link-bg-color: #007bff;
+            --link-hover-bg-color: #0056b3;
+            --text-color: #fff;
+            --border-color: #ccc;
+            --highlight-color: #ff8c00;
+            --highlight-hover-color: #e67e00;
+            --special-offer-bg-color: #008080; /* Vert canard */
+            --special-offer-border-color: #008080;
+        }
         body {
-            background-color: #f5f5dc;
+            background-color: var(--main-bg-color);
             font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
             display: flex;
             justify-content: space-between;
+            width: 80%;
+            background-color: var(--container-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .form-container, .results-container {
             padding: 20px;
+            width: 50%;
         }
         .form-container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            width: 30%;
+            background-color: var(--form-bg-color);
+        }
+        .form-container h1 {
+            text-align: center;
         }
         .form-group {
             margin-bottom: 15px;
         }
-        label {
+        .form-group label {
             display: block;
             margin-bottom: 5px;
         }
-        select, input {
+        .form-group select, .form-group input {
             width: 100%;
             padding: 8px;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--border-color);
         }
         .btn-calculate {
-            background-color: #007bff;
-            color: #fff;
+            background-color: var(--button-bg-color);
+            color: var(--text-color);
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
+            transition: background-color 0.3s;
+        }
+        .btn-calculate:hover {
+            background-color: var(--button-hover-bg-color);
         }
         .results-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            width: 60%;
-            display: none;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+            flex-direction: column;
+            align-items: center;
+            visibility: hidden; /* Masquer initialement */
+        }
+        .results-row {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
         }
         .result-circle {
-            background-color: #008080; /* Vert canard */
-            color: #fff;
+            background-color: var(--button-bg-color);
+            color: var(--text-color);
             border-radius: 50%;
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            font-weight: bold;
-            font-size: 1.5em;
+            justify-content: center;
+            margin: 20px 10px;
+            position: relative;
+            transition: transform 0.3s;
+            font-size: 1.5em; /* Agrandir la police des caractères */
         }
-        .result-title {
-            font-size: 0.7em;
-            margin-top: 10px;
+        .result-circle small {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
             text-align: center;
+            font-size: 12px; /* Réduction de la taille des titres */
+        }
+        .result-circle#metabolisme-base small {
+            bottom: -20px; /* Placer MB juste en dessous du résultat */
         }
         .program-container {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-            text-align: left;
-            color: #000;
-            display: none;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+            width: 100%;
+            text-align: center; /* Centrer le texte */
+            visibility: hidden; /* Masquer initialement */
         }
-        .program-link {
+        .program-container a {
             display: block;
-            background-color: #008080; /* Vert canard */
-            color: #fff;
+            background-color: var(--link-bg-color);
+            color: var(--text-color);
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        .program-container a:hover {
+            background-color: var(--link-hover-bg-color);
+        }
+        .program-container p {
+            margin: 10px 0;
+            font-weight: bold;
+            color: black; /* Changer la couleur du texte en noir */
+            font-size: 0.8em; /* Réduire la taille des caractères */
+        }
+        .program-container button {
+            background-color: var(--highlight-color); /* Orange */
+            color: var(--text-color);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px auto; /* Centrer le bouton */
+            display: block; /* Centrer le bouton */
+        }
+        .program-container button:hover {
+            background-color: var(--highlight-hover-color);
+        }
+        .encadre {
+            border: 2px solid var(--button-bg-color); /* Vert canard */
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: var(--form-bg-color);
+            text-align: left; /* Aligner le texte à gauche */
+            height: 80px; /* Réduire la hauteur */
+        }
+        .encadre h2 {
+            background-color: var(--button-bg-color); /* Vert canard */
+            color: var(--text-color);
             padding: 10px;
             border-radius: 5px;
-            text-align: center;
-            text-decoration: none;
-            margin-bottom: 10px;
+            font-size: 1em;
+            margin: 0 0 10px 0;
+        }
+        .encadre p span {
+            color: blue; /* Mettre les chiffres des kg en bleu */
             font-weight: bold;
         }
-        .program-text {
-            font-weight: normal;
-        }
-        .program-text span {
-            font-weight: bold;
-            text-decoration: underline;
-        }
-        .footer {
+        .special-offer {
+            background-color: var(--special-offer-bg-color); /* Vert canard */
+            color: var(--text-color);
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
-            margin-top: 20px;
-            font-family: 'Times New Roman', serif;
+            margin-top: 10px; /* Remonter le cadre vert */
+            border: 2px solid var(--special-offer-border-color); /* Contour vert canard */
+            animation: blink 3s infinite; /* Animation clignotante moins rapide */
+            cursor: pointer; /* Curseur pointeur */
+            visibility: hidden; /* Masquer initialement */
+        }
+        .special-offer h2 {
+            margin: 0 0 10px 0;
+        }
+        .countdown {
             font-size: 2em;
+            margin: 10px 0;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">BILAN METABOLIQUE</h1>
     <div class="container">
         <div class="form-container">
+            <h1>Bilan métabolique</h1>
             <div class="form-group">
                 <label for="sexe">Sexe :</label>
-                <select id="sexe">
+                <select id="sexe" aria-label="Sélectionner le sexe">
                     <option value="femme">Femme</option>
                     <option value="homme">Homme</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="age">Âge :</label>
-                <input type="number" id="age">
+                <input type="number" id="age" aria-label="Entrer l'âge">
             </div>
             <div class="form-group">
                 <label for="taille">Taille (cm) :</label>
-                <input type="number" id="taille">
+                <input type="number" id="taille" aria-label="Entrer la taille en cm">
             </div>
             <div class="form-group">
                 <label for="poids">Poids (kg) :</label>
-                <input type="number" id="poids">
+                <input type="number" id="poids" aria-label="Entrer le poids en kg">
             </div>
             <div class="form-group">
                 <label for="activite">Niveau d’activité physique :</label>
-                <select id="activite">
+                <select id="activite" aria-label="Sélectionner le niveau d'activité physique">
                     <option value="1.2">Sédentaire</option>
                     <option value="1.375">Légèrement actif</option>
                     <option value="1.55">Modérément actif</option>
@@ -141,35 +233,44 @@
                     <option value="1.9">Extrêmement actif</option>
                 </select>
             </div>
-            <button class="btn-calculate" onclick="calculer()">Calculer</button>
+            <button class="btn-calculate" onclick="calculer()" aria-label="Calculer le bilan métabolique">Calculer</button>
         </div>
-        <div class="results-container" id="results-container">
-            <div id="result-metabolisme-base" class="result-circle">
-                <div id="metabolisme-base"></div>
-                <div class="result-title">MB</div>
+        <div class="results-container">
+            <div class="results-row">
+                <div class="result-circle" id="metabolisme-base">
+                                        <span id="result-base"></span>
+                    <small>MB</small>
+                </div>
+                <div class="result-circle" id="metabolisme-activite">
+                    <span id="result-activite"></span>
+                    <small>DET</small>
+                </div>
+                <div class="result-circle" id="imc">
+                    <span id="result-imc"></span>
+                    <small>IMC</small>
+                </div>
+                <div class="result-circle" id="poids-ideal">
+                    <span id="result-poids-ideal"></span>
+                    <small>Poids idéal</small>
+                </div>
             </div>
-            <div id="result-metabolisme-activite" class="result-circle">
-                <div id="metabolisme-activite"></div>
-                <div class="result-title">DET</div>
+            <div class="program-container">
+                <div class="encadre">
+                    <p id="perte-poids-1500"></p>
+                    <button onclick="window.location.href='https://kcoaching.taplink.ws/d/1500en30jours/'" aria-label="Acheter Programme 1500">Acheter Programme 1500</button>
+                </div>
+                <div class="encadre">
+                    <p id="perte-poids-1400"></p>
+                    <button onclick="window.location.href='https://kcoaching.taplink.ws/d/140014jours/'" aria-label="Acheter Programme 1400">Acheter Programme 1400</button>
+                </div>
             </div>
-            <div id="result-imc" class="result-circle">
-                <div id="imc"></div>
-                <div class="result-title">IMC</div>
-            </div>
-            <div id="result-poids-ideal" class="result-circle">
-                <div id="poids-ideal"></div>
-                <div class="result-title">Poids idéal</div>
-            </div>
-            <div class="program-container" id="program-container">
-                <a id="program-1500" class="program-link" href="https://kcoaching.taplink.ws/d/1500en30jours/">Programme 1500 calories</a>
-                <div class="program-text" id="text-1500"></div>
-                <br>
-                <a id="program-1400" class="program-link" href="https://kcoaching.taplink.ws/d/140014jours/">Programme 1400 calories</a>
-                <div class="program-text" id="text-1400"></div>
+            <div class="special-offer" onclick="window.location.href='https://kcoaching.taplink.ws/p/e74ce9/'" aria-label="Offre spéciale 50% de réduction">
+                <h2>Offre spéciale 50% de réduction avec le code promo KCOACHING2024</h2>
+                <div class="countdown" id="countdown">01:00:00</div>
             </div>
         </div>
     </div>
-    <div class="footer">K'COACHING</div>
+    <footer>K'COACHING</footer>
     <script>
         function calculer() {
             const sexe = document.getElementById('sexe').value;
@@ -179,37 +280,73 @@
             const activite = document.getElementById('activite').value;
 
             let metabolismeBase;
-            if (sexe === 'femme') {
-                metabolismeBase = 655 + (9.6 * poids) + (1.8 * taille) - (4.7 * age);
+            if (sexe === 'homme') {
+                metabolismeBase = 88.362 + (13.397 * poids) + (4.799 * taille) - (5.677 * age);
             } else {
-                metabolismeBase = 66 + (13.7 * poids) + (5 * taille) - (6.8 * age);
+                metabolismeBase = 447.593 + (9.247 * poids) + (3.098 * taille) - (4.330 * age);
             }
             metabolismeBase = Math.round(metabolismeBase);
 
             const metabolismeActivite = Math.round(metabolismeBase * activite);
             const imc = Math.round(poids / ((taille / 100) ** 2));
-            const poidsIdealFemme = Math.round(taille - 100 - ((taille - 150) / 2.5));
             const poidsIdealHomme = Math.round(taille - 100 - ((taille - 150) / 4));
+            const poidsIdealFemme = Math.round(taille - 100 - ((taille - 150) / 2.5));
 
-            document.getElementById('metabolisme-base').innerText = metabolismeBase + ' Kcal';
-            document.getElementById('metabolisme-activite').innerText = metabolismeActivite + ' Kcal';
-            document.getElementById('imc').innerText = imc;
-            document.getElementById('poids-ideal').innerText = (sexe === 'femme' ? poidsIdealFemme : poidsIdealHomme) + ' Kg';
+            // Fonction pour animer les résultats
+            function animateValue(id, start, end, duration, callback) {
+                const range = end - start;
+                let current = start;
+                const increment = end > start ? 1 : -1;
+                const stepTime = Math.abs(Math.floor(duration / range));
+                const obj = document.getElementById(id);
+                const timer = setInterval(() => {
+                    current += increment;
+                    obj.innerText = current;
+                    if (current == end) {
+                        clearInterval(timer);
+                        if (callback) callback();
+                    }
+                }, stepTime);
+            }
+
+            document.querySelector('.results-container').style.visibility = 'visible';
+
+            animateValue('result-base', 0, metabolismeBase, 500, () => {
+                document.getElementById('metabolisme-activite').style.visibility = 'visible';
+                animateValue('result-activite', 0, metabolismeActivite, 500, () => {
+                    document.getElementById('imc').style.visibility = 'visible';
+                    animateValue('result-imc', 0, imc, 500, () => {
+                        document.getElementById('poids-ideal').style.visibility = 'visible';
+                        animateValue('result-poids-ideal', 0, sexe === 'homme' ? poidsIdealHomme : poidsIdealFemme, 500, () => {
+                            document.querySelector('.program-container').style.visibility = 'visible';
+                            document.querySelector('.special-offer').style.visibility = 'visible';
+                        });
+                    });
+                });
+            });
 
             const pertePoids1500 = ((metabolismeActivite - 1500) * 30 / 7700).toFixed(1);
             const pertePoids1400 = ((metabolismeActivite - 1400) * 30 / 7700).toFixed(1);
 
-            document.getElementById('text-1500').innerHTML = `Avec un apport quotidien de 1500 calories ta perte de poids est estimée à <span>${pertePoids1500} kg</span> par mois. Clique sur le titre pour accéder au programme.`;
-            document.getElementById('text-1400').innerHTML = `Avec un apport quotidien de 1400 calories ta perte de poids est estimée à <span>${pertePoids1400} kg</span> par mois. Clique sur le titre pour accéder au programme.`;
+            document.getElementById('perte-poids-1500').innerHTML = `Avec un apport quotidien de 1500 calories ta perte de poids estimée est de <span>${pertePoids1500} kg</span> par mois, clique ici pour acheter ton programme 1500 calories`;
+            document.getElementById('perte-poids-1400').innerHTML = `Avec un apport quotidien de 1400 calories ta perte de poids estimée est de <span>${pertePoids1400} kg</span> par mois, clique ici pour acheter ton programme 1400 calories`;
 
-            const resultsContainer = document.getElementById('results-container');
-            const programContainer = document.getElementById('program-container');
-            resultsContainer.style.display = 'flex';
-            programContainer.style.display = 'block';
-            setTimeout(() => {
-		resultsContainer.style.opacity = '1';
-                programContainer.style.opacity = '1';
-            }, 100);
+            // Initialisation du compte à rebours
+            const countdownElement = document.getElementById('countdown');
+            let time = 3600; // 1 heure en secondes
+
+            function updateCountdown() {
+                const hours = Math.floor(time / 3600);
+                const minutes = Math.floor((time % 3600) / 60);
+                const seconds = time % 60;
+                countdownElement.innerHTML = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                time--;
+                if (time >= 0) {
+                    setTimeout(updateCountdown, 1000);
+                }
+            }
+
+            updateCountdown();
         }
     </script>
 </body>

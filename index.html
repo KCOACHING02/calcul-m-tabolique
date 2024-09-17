@@ -27,13 +27,15 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Utilisation de min-height au lieu de height */
             margin: 0;
+            padding: 10px; /* Ajout de padding pour éviter que le contenu touche les bords de l'écran */
         }
         .container {
             display: flex;
-            justify-content: space-between;
-            width: 80%;
+            flex-direction: column; /* Changement de direction pour les petits écrans */
+            width: 100%; /* Utilisation de 100% pour les petits écrans */
+            max-width: 800px; /* Limite la largeur maximale */
             background-color: var(--container-bg-color);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -41,7 +43,7 @@
         }
         .form-container, .results-container {
             padding: 20px;
-            width: 50%;
+            width: 100%; /* Utilisation de 100% pour les petits écrans */
         }
         .form-container {
             background-color: var(--form-bg-color);
@@ -83,19 +85,20 @@
         }
         .results-row {
             display: flex;
-            justify-content: space-around;
+            flex-direction: column; /* Changement de direction pour les petits écrans */
+            align-items: center;
             width: 100%;
         }
         .result-circle {
             background-color: var(--button-bg-color);
             color: var(--text-color);
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            width: 80px; /* Taille réduite pour les petits écrans */
+            height: 80px; /* Taille réduite pour les petits écrans */
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px 10px;
+            margin: 10px 0; /* Ajustement des marges */
             position: relative;
             transition: transform 0.3s;
             font-size: 1.5em; /* Agrandir la police des caractères */
@@ -126,6 +129,7 @@
             text-decoration: none;
             margin: 10px 0;
             transition: background-color 0.3s;
+            width: 100%; /* Assurez-vous que les liens prennent toute la largeur */
         }
         .program-container a:hover {
             background-color: var(--link-hover-bg-color);
@@ -146,6 +150,7 @@
             transition: background-color 0.3s;
             margin: 10px auto; /* Centrer le bouton */
             display: block; /* Centrer le bouton */
+            width: 100%; /* Assurez-vous que le bouton prend toute la largeur */
         }
         .program-container button:hover {
             background-color: var(--highlight-hover-color);
@@ -157,7 +162,8 @@
             margin: 10px 0;
             background-color: var(--form-bg-color);
             text-align: left; /* Aligner le texte à gauche */
-            height: 80px; /* Réduire la hauteur */
+            height: auto; /* Ajuster la hauteur automatiquement */
+            width: 100%; /* Assurez-vous que les encadrés prennent toute la largeur */
         }
         .encadre h2 {
             background-color: var(--button-bg-color); /* Vert canard */
@@ -174,7 +180,7 @@
         .special-offer {
             background-color: var(--special-offer-bg-color); /* Vert canard */
             color: var(--text-color);
-            padding: 20px;
+            padding: 10px; /* Réduire le padding pour les petits écrans */
             border-radius: 10px;
             text-align: center;
             margin-top: 10px; /* Remonter le cadre vert */
@@ -187,19 +193,44 @@
             margin: 0 0 10px 0;
         }
         .countdown {
-            font-size: 2em;
+            font-size: 1.5em; /* Réduire la taille de la police pour les petits écrans */
             margin: 10px 0;
         }
         footer {
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 1em; /* Réduire la taille de la police pour les petits écrans */
             font-weight: bold;
         }
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-    </style>
+        @media (min-width: 600px) {
+            .container {
+                flex-direction: row; /* Retour à la disposition en ligne pour les écrans plus larges */
+            }
+            .form-container, .results-container {
+                width: 50%; /* Retour à 50% pour les écrans plus larges */
+            }
+            .results-row {
+                flex-direction: row; /* Retour à la disposition en ligne pour les écrans plus larges */
+            }
+            .result-circle {
+                width: 100px; /* Taille normale pour les écrans plus larges */
+                height: 100px; /* Taille normale pour les écrans plus larges */
+                margin: 20px 10px; /* Marges normales pour les écrans plus larges */
+            }
+            .special-offer {
+                padding: 20px; /* Taille normale pour les écrans plus larges */
+            }
+            .countdown {
+                font-size: 2em; /* Taille normale pour les écrans plus larges */
+            }
+            footer {
+                font-size: 1.2em; /* Taille normale pour les écrans plus larges */
+            }
+        }
+        </style>
 </head>
 <body>
     <div class="container">

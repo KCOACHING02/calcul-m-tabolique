@@ -19,6 +19,11 @@
             --highlight-hover-color: #e67e00;
             --special-offer-bg-color: #008080; /* Vert canard */
             --special-offer-border-color: #008080;
+            --rectangle-bg-color: #d4edda; /* Vert clair */
+            --rectangle-text-color: #000; /* Noir */
+            --rectangle-border-color: #008080; /* Vert canard */
+            --result-bg-color: #001f3f; /* Bleu marine */
+            --result-text-color: #fff; /* Blanc */
         }
         body {
             background-color: var(--main-bg-color);
@@ -27,15 +32,15 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Utilisation de min-height au lieu de height */
+            min-height: 100vh;
             margin: 0;
-            padding: 10px; /* Ajout de padding pour éviter que le contenu touche les bords de l'écran */
+            padding: 10px;
         }
         .container {
             display: flex;
-            flex-direction: column; /* Changement de direction pour les petits écrans */
-            width: 100%; /* Utilisation de 100% pour les petits écrans */
-            max-width: 800px; /* Limite la largeur maximale */
+            flex-direction: column;
+            width: 100%;
+            max-width: 800px;
             background-color: var(--container-bg-color);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -43,7 +48,7 @@
         }
         .form-container, .results-container {
             padding: 20px;
-            width: 100%; /* Utilisation de 100% pour les petits écrans */
+            width: 100%;
         }
         .form-container {
             background-color: var(--form-bg-color);
@@ -81,43 +86,40 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            visibility: hidden; /* Masquer initialement */
+            visibility: hidden;
         }
         .results-row {
             display: flex;
-            flex-direction: column; /* Changement de direction pour les petits écrans */
+            flex-direction: column;
             align-items: center;
             width: 100%;
+            gap: 10px; /* Réduire l'espace entre les cercles */
         }
         .result-circle {
             background-color: var(--button-bg-color);
             color: var(--text-color);
             border-radius: 50%;
-            width: 80px; /* Taille réduite pour les petits écrans */
-            height: 80px; /* Taille réduite pour les petits écrans */
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 10px 0; /* Ajustement des marges */
+            margin: 5px 0; /* Réduire l'espace entre les cercles */
             position: relative;
             transition: transform 0.3s;
-            font-size: 1.5em; /* Agrandir la police des caractères */
+            font-size: 1.5em;
         }
         .result-circle small {
             position: absolute;
             bottom: 10px;
             width: 100%;
             text-align: center;
-            font-size: 12px; /* Réduction de la taille des titres */
-        }
-        .result-circle#metabolisme-base small {
-            bottom: 10px; /* Ajuste la position si nécessaire */
-            font-size: 12px; /* Taille de la police */
+            font-size: 12px;
         }
         .program-container {
             width: 100%;
-            text-align: center; /* Centrer le texte */
-            visibility: hidden; /* Masquer initialement */
+            text-align: center;
+            visibility: hidden;
         }
         .program-container a {
             display: block;
@@ -129,7 +131,7 @@
             text-decoration: none;
             margin: 10px 0;
             transition: background-color 0.3s;
-            width: 100%; /* Assurez-vous que les liens prennent toute la largeur */
+            width: 100%;
         }
         .program-container a:hover {
             background-color: var(--link-hover-bg-color);
@@ -137,36 +139,39 @@
         .program-container p {
             margin: 10px 0;
             font-weight: bold;
-            color: black; /* Changer la couleur du texte en noir */
-            font-size: 0.8em; /* Réduire la taille des caractères */
+            color: black;
+            font-size: 0.8em;
         }
         .program-container button {
-            background-color: var(--highlight-color); /* Orange */
+            background-color: var(--highlight-color);
             color: var(--text-color);
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin: 10px auto; /* Centrer le bouton */
-            display: block; /* Centrer le bouton */
-            width: 100%; /* Assurez-vous que le bouton prend toute la largeur */
+            margin: 10px auto;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            height: auto; /* Réduire la hauteur */
         }
         .program-container button:hover {
             background-color: var(--highlight-hover-color);
         }
         .encadre {
-            border: 2px solid var(--button-bg-color); /* Vert canard */
+            border: 2px solid var(--button-bg-color);
             border-radius: 10px;
             padding: 10px;
-            margin: 10px 0;
+            margin: 10px auto;
             background-color: var(--form-bg-color);
-            text-align: left; /* Aligner le texte à gauche */
-            height: auto; /* Ajuster la hauteur automatiquement */
-            width: 100%; /* Assurez-vous que les encadrés prennent toute la largeur */
+            text-align: left;
+            height: auto;
+            width: 100%;
+            max-width: 300px;
         }
         .encadre h2 {
-            background-color: var(--button-bg-color); /* Vert canard */
+            background-color: var(--button-bg-color);
             color: var(--text-color);
             padding: 10px;
             border-radius: 5px;
@@ -174,60 +179,54 @@
             margin: 0 0 10px 0;
         }
         .encadre p span {
-            color: blue; /* Mettre les chiffres des kg en bleu */
+            display: inline-block;
+            background-color: var(--result-bg-color);
+            color: var(--result-text-color);
+            padding: 5px;
+            border-radius: 5px;
             font-weight: bold;
+            width: auto; /* Ajuster la largeur à la taille du texte */
         }
-        .special-offer {
-            background-color: var(--special-offer-bg-color); /* Vert canard */
-            color: var(--text-color);
-            padding: 10px; /* Réduire le padding pour les petits écrans */
+        .rectangle {
+            background-color: var(--rectangle-bg-color);
+            color: var(--rectangle-text-color);
+            border: 2px solid var(--rectangle-border-color);
             border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
             text-align: center;
-            margin-top: 10px; /* Remonter le cadre vert */
-            border: 2px solid var(--special-offer-border-color); /* Contour vert canard */
-            animation: blink 3s infinite; /* Animation clignotante moins rapide */
-            cursor: pointer; /* Curseur pointeur */
-            visibility: hidden; /* Masquer initialement */
+            width: 100px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1em;
         }
-        .special-offer h2 {
-            margin: 0 0 10px 0;
-        }
-        .countdown {
-            font-size: 1.5em; /* Réduire la taille de la police pour les petits écrans */
-            margin: 10px 0;
+        .rectangle-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
         footer {
             margin-top: 20px;
-            font-size: 1em; /* Réduire la taille de la police pour les petits écrans */
+            font-size: 1em;
             font-weight: bold;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
         }
         @media (min-width: 600px) {
             .container {
-                flex-direction: row; /* Retour à la disposition en ligne pour les écrans plus larges */
+                flex-direction: row;
             }
             .form-container, .results-container {
-                width: 50%; /* Retour à 50% pour les écrans plus larges */
+                width: 50%;
             }
             .results-row {
-                flex-direction: row; /* Retour à la disposition en ligne pour les écrans plus larges */
+                flex-direction: row;
             }
             .result-circle {
-                width: 100px; /* Taille normale pour les écrans plus larges */
-                height: 100px; /* Taille normale pour les écrans plus larges */
-                margin: 20px 10px; /* Marges normales pour les écrans plus larges */
-            }
-            .special-offer {
-                padding: 20px; /* Taille normale pour les écrans plus larges */
-            }
-            .countdown {
-                font-size: 2em; /* Taille normale pour les écrans plus larges
-            }
-            footer {
-                font-size: 1.2em; /* Taille normale pour les écrans plus larges */
+                width: 100px;
+                height: 100px;
+                margin: 10px 5px; /* Réduire l'espace entre les cercles */
             }
         }
     </style>
@@ -257,7 +256,7 @@
             </div>
             <div class="form-group">
                 <label for="activite">Niveau d’activité physique :</label>
-                <select id="activite" aria-label="Sélectionner le niveau d'activité physique">
+                                <select id="activite" aria-label="Sélectionner le niveau d'activité physique">
                     <option value="1.2">Sédentaire</option>
                     <option value="1.375">Légèrement actif</option>
                     <option value="1.55">Modérément actif</option>
@@ -283,7 +282,21 @@
                 </div>
                 <div class="result-circle" id="poids-ideal">
                     <span id="result-poids-ideal"></span>
-                    <small>Poids idéal</small>
+                    <small>Poids idéal (kg)</small>
+                </div>
+            </div>
+            <div class="rectangle-container">
+                <div class="rectangle" id="proteines">
+                    <span id="result-proteines"></span>
+                    <small>Protéines (g)</small>
+                </div>
+                <div class="rectangle" id="lipides">
+                    <span id="result-lipides"></span>
+                    <small>Lipides (g)</small>
+                </div>
+                <div class="rectangle" id="glucides">
+                    <span id="result-glucides"></span>
+                    <small>Glucides (g)</small>
                 </div>
             </div>
             <div class="program-container">
@@ -295,10 +308,6 @@
                     <p id="perte-poids-1400"></p>
                     <button onclick="window.location.href='https://kcoaching.taplink.ws/d/140014jours/'" aria-label="Acheter Programme 1400">Acheter Programme 1400</button>
                 </div>
-            </div>
-            <div class="special-offer" onclick="window.location.href='https://kcoaching.taplink.ws/p/e74ce9/'" aria-label="Offre spéciale 50% de réduction">
-                <h2>Offre spéciale 50% de réduction avec le code promo KCOACHING2024</h2>
-                <div class="countdown" id="countdown">01:00:00</div>
             </div>
         </div>
     </div>
@@ -324,8 +333,12 @@
             const poidsIdealHomme = Math.round(taille - 100 - ((taille - 150) / 4));
             const poidsIdealFemme = Math.round(taille - 100 - ((taille - 150) / 2.5));
 
+            const besoinProteines = Math.round(poids * activite * 1.2);
+            const besoinLipides = Math.round(poids * activite * 0.8);
+            const besoinGlucides = Math.round(poids * activite * 2.5);
+
             // Fonction pour animer les résultats
-            function animateValue(id, start, end, duration, callback) {
+            function animateValue(id, start, end, duration) {
                 const range = end - start;
                 let current = start;
                 const increment = end > start ? 1 : -1;
@@ -336,26 +349,19 @@
                     obj.innerText = current;
                     if (current == end) {
                         clearInterval(timer);
-                        if (callback) callback();
                     }
                 }, stepTime);
             }
 
             document.querySelector('.results-container').style.visibility = 'visible';
 
-            animateValue('result-base', 0, metabolismeBase, 500, () => {
-                document.getElementById('metabolisme-activite').style.visibility = 'visible';
-                animateValue('result-activite', 0, metabolismeActivite, 500, () => {
-                    document.getElementById('imc').style.visibility = 'visible';
-                    animateValue('result-imc', 0, imc, 500, () => {
-                        document.getElementById('poids-ideal').style.visibility = 'visible';
-                        animateValue('result-poids-ideal', 0, sexe === 'homme' ? poidsIdealHomme : poidsIdealFemme, 500, () => {
-                            document.querySelector('.program-container').style.visibility = 'visible';
-                            document.querySelector('.special-offer').style.visibility = 'visible';
-                        });
-                    });
-                });
-            });
+            animateValue('result-base', 0, metabolismeBase, 500);
+            animateValue('result-activite', 0, metabolismeActivite, 500);
+            animateValue('result-imc', 0, imc, 500);
+            animateValue('result-poids-ideal', 0, sexe === 'homme' ? poidsIdealHomme : poidsIdealFemme, 500);
+            animateValue('result-proteines', 0, besoinProteines, 500);
+            animateValue('result-lipides', 0, besoinLipides, 500);
+            animateValue('result-glucides', 0, besoinGlucides, 500);
 
             const pertePoids1500 = ((metabolismeActivite - 1500) * 30 / 7700).toFixed(1);
             const pertePoids1400 = ((metabolismeActivite - 1400) * 30 / 7700).toFixed(1);
@@ -363,28 +369,7 @@
             document.getElementById('perte-poids-1500').innerHTML = `Avec un apport quotidien de 1500 calories ta perte de poids estimée est de <span>${pertePoids1500} kg</span> par mois, clique ici pour acheter ton programme 1500 calories`;
             document.getElementById('perte-poids-1400').innerHTML = `Avec un apport quotidien de 1400 calories ta perte de poids estimée est de <span>${pertePoids1400} kg</span> par mois, clique ici pour acheter ton programme 1400 calories`;
 
-            // Initialisation du compte à rebours
-            const countdownElement = document.getElementById('countdown');
-            const targetDate = new Date('2024-09-18T23:59:00').getTime();
-
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                countdownElement.innerHTML = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    countdownElement.innerHTML = "00:00:00";
-                }
-            }
-
-            const countdownInterval = setInterval(updateCountdown, 1000);
-            updateCountdown();
+            document.querySelector('.program-container').style.visibility = 'visible';
         }
     </script>
 </body>

@@ -93,11 +93,10 @@
         }
         .results-row {
             display: flex;
-            flex-direction: row; /* Afficher les cercles côte à côte */
+            flex-direction: column;
             align-items: center;
             width: 100%;
             gap: 10px; /* Réduire l'espace entre les cercles */
-            flex-wrap: wrap; /* Permettre le retour à la ligne sur petits écrans */
         }
         .result-circle {
             background-color: var(--button-bg-color);
@@ -126,7 +125,6 @@
             visibility: hidden;
             display: flex;
             justify-content: space-around; /* Placer les encadrés côte à côte */
-            flex-wrap: wrap; /* Permettre le retour à la ligne sur petits écrans */
         }
         .program-container a {
             display: block;
@@ -237,7 +235,7 @@
             }
         }
         .program-image {
-            width: 80%; /* Multiplier la largeur par 2 et ajuster pour smartphone */
+            width: 40%; /* Multiplier la largeur par 2 */
             height: auto;
             display: block;
             margin: 10px auto;
@@ -264,7 +262,7 @@
                 <label for="taille">Taille (cm) :</label>
                 <input type="number" id="taille" aria-label="Entrer la taille en cm">
             </div>
-            <div class="form-group">
+                        <div class="form-group">
                 <label for="poids">Poids (kg) :</label>
                 <input type="number" id="poids" aria-label="Entrer le poids en kg">
             </div>

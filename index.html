@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BILAN METABOLIQUE</title>
+    <title>CALCULATEUR METABOLIQUE</title>
     <style>
         :root {
             --main-bg-color: #d4edda;
@@ -15,8 +15,8 @@
             --link-hover-bg-color: #0056b3;
             --text-color: #fff;
             --border-color: #ccc;
-            --highlight-color: #ff8c00;
-            --highlight-hover-color: #e67e00;
+            --highlight-color: #000; /* Noir */
+            --highlight-hover-color: #333; /* Gris foncé */
             --special-offer-bg-color: #008080; /* Vert canard */
             --special-offer-border-color: #008080;
             --rectangle-bg-color: #d4edda; /* Vert clair */
@@ -39,7 +39,7 @@
         .container {
             display: flex;
             flex-direction: column;
-            width: 100%;
+            width: 66.66%; /* Réduire la largeur du fond gris d'un tiers */
             max-width: 800px;
             background-color: var(--container-bg-color);
             border-radius: 10px;
@@ -55,6 +55,8 @@
         }
         .form-container h1 {
             text-align: center;
+            font-size: 1.5em; /* Réduire la taille des caractères */
+            line-height: 1.2; /* Mettre le titre sur deux lignes */
         }
         .form-group {
             margin-bottom: 15px;
@@ -64,7 +66,7 @@
             margin-bottom: 5px;
         }
         .form-group select, .form-group input {
-            width: 100%;
+            width: 33.33%; /* Réduire la largeur des champs d'un tiers */
             padding: 8px;
             border-radius: 5px;
             border: 1px solid var(--border-color);
@@ -76,8 +78,9 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
+            width: 50%; /* Réduire la largeur du bouton de moitié */
             transition: background-color 0.3s;
+            margin: 10px auto; /* Centrer le bouton */
         }
         .btn-calculate:hover {
             background-color: var(--button-hover-bg-color);
@@ -120,10 +123,12 @@
             width: 100%;
             text-align: center;
             visibility: hidden;
+            display: flex;
+            justify-content: space-around; /* Placer les encadrés côte à côte */
         }
         .program-container a {
             display: block;
-            background-color: var(--link-bg-color);
+            background-color: transparent; /* Supprimer le fond bleu */
             color: var(--text-color);
             padding: 10px;
             text-align: center;
@@ -143,8 +148,8 @@
             font-size: 0.8em;
         }
         .program-container button {
-            background-color: var(--highlight-color);
-            color: var(--text-color);
+            background-color: var(--highlight-color); /* Noir */
+            color: var(--text-color); /* Blanc */
             padding: 10px;
             border: none;
             border-radius: 5px;
@@ -157,13 +162,13 @@
             height: auto; /* Réduire la hauteur */
         }
         .program-container button:hover {
-            background-color: var(--highlight-hover-color);
+            background-color: var(--highlight-hover-color); /* Gris foncé */
         }
         .encadre {
             border: 2px solid var(--button-bg-color);
             border-radius: 10px;
             padding: 10px;
-            margin: 10px auto;
+            margin: 10px;
             background-color: var(--form-bg-color);
             text-align: left;
             height: auto;
@@ -229,12 +234,19 @@
                 margin: 10px 5px; /* Réduire l'espace entre les cercles */
             }
         }
+        .program-image {
+            width: 40%; /* Multiplier la largeur par 2 */
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="form-container">
-            <h1>Bilan métabolique</h1>
+            <h1>Calculateur<br>Métabolique</h1>
             <div class="form-group">
                 <label for="sexe">Sexe :</label>
                 <select id="sexe" aria-label="Sélectionner le sexe">
@@ -250,13 +262,13 @@
                 <label for="taille">Taille (cm) :</label>
                 <input type="number" id="taille" aria-label="Entrer la taille en cm">
             </div>
-            <div class="form-group">
+                        <div class="form-group">
                 <label for="poids">Poids (kg) :</label>
                 <input type="number" id="poids" aria-label="Entrer le poids en kg">
             </div>
             <div class="form-group">
                 <label for="activite">Niveau d’activité physique :</label>
-                                <select id="activite" aria-label="Sélectionner le niveau d'activité physique">
+                <select id="activite" aria-label="Sélectionner le niveau d'activité physique">
                     <option value="1.2">Sédentaire</option>
                     <option value="1.375">Légèrement actif</option>
                     <option value="1.55">Modérément actif</option>
@@ -302,10 +314,16 @@
             <div class="program-container">
                 <div class="encadre">
                     <p id="perte-poids-1500"></p>
+                    <a href="https://kcoaching.taplink.ws/d/1500en30jours/">
+                        <img src="images/imgprog1500.jpg" alt="Programme 1500" class="program-image">
+                    </a>
                     <button onclick="window.location.href='https://kcoaching.taplink.ws/d/1500en30jours/'" aria-label="Acheter Programme 1500">Acheter Programme 1500</button>
                 </div>
                 <div class="encadre">
                     <p id="perte-poids-1400"></p>
+                    <a href="https://kcoaching.taplink.ws/d/140014jours/">
+                        <img src="images/imgprog1400.jpg" alt="Programme 1400" class="program-image">
+                    </a>
                     <button onclick="window.location.href='https://kcoaching.taplink.ws/d/140014jours/'" aria-label="Acheter Programme 1400">Acheter Programme 1400</button>
                 </div>
             </div>

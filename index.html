@@ -128,10 +128,17 @@
             font-weight: bold;
             display: inline-block;
         }
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 100px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <div class="container" id="form-container">
+        <img src="images/Logo.jpg" alt="Logo" class="logo">
         <h1>Calculateur métabolique</h1>
         <form id="metabolic-form">
             <label for="sexe">Sexe :</label>
@@ -203,10 +210,10 @@
             const deficit500 = Math.round(det - 500);
             const imc = Math.round(poids / ((taille / 100) ** 2));
             const poidsIdeal = Math.round(sexe === 'homme' ? taille - 100 - ((taille - 150) / 4) : taille - 100 - ((taille - 150) / 2.5));
-            const pertePoids1500 = Math.round((det - 1500) * 30 / 7700);
+                        const pertePoids1500 = Math.round((det - 1500) * 30 / 7700);
             const pertePoids1400 = Math.round((det - 1400) * 30 / 7700);
 
-                        // Afficher les résultats
+            // Afficher les résultats
             document.getElementById('mb').querySelector('strong').innerText = mb;
             document.getElementById('det').querySelector('strong').innerText = det;
             document.getElementById('deficit').querySelector('strong').innerText = deficit500;

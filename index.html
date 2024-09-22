@@ -19,6 +19,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
         }
         h1 {
             text-align: center;
@@ -142,6 +144,7 @@
             margin-top: 20px;
             cursor: pointer;
             font-weight: bold;
+            width: 100%;
         }
         .image-container {
             display: flex;
@@ -233,107 +236,107 @@
             <div class="result-box" style="width: calc(100% - 20px);">
                 <div>
                     <p>Avec un apport quotidien de 1400 calories ta perte de poids est estimée à <span id="poids-perte-1400" class="highlight"></span> par mois.</p>
-                    <button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/140014jours/'">Acheter le programme 1400 – 9.99€</button>
-                </div>
-                <img src="images/imgprog1400.jpg" alt="Programme 1400">
-            </div>
-        </div>
-        <div class="ideal-weight-box">
-            <p>Ton poids idéal selon la formule de Lorentz est de <span id="poids-ideal" class="highlight"></span>.</p>
-        </div>
-        <div style="display: flex; justify-content: space-between;">
-            <button class="nutrient-button" onclick="showNutrientNeeds()">Pour connaître tes besoins en protéines, glucides, lipides</button>
-            <button class="small-button" onclick="returnToForm()">Retourner au formulaire</button>
-        </div>
-    </div>
+<button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/140014jours/'">Acheter le programme 1400 – 9.99€</button>
+</div>
+<img src="images/imgprog1400.jpg" alt="Programme 1400">
+</div>
+</div>
+<div class="ideal-weight-box">
+<p>Ton poids idéal selon la formule de Lorentz est de <span id="poids-ideal" class="highlight"></span>.</p>
+</div>
+<button class="nutrient-button" onclick="showNutrientNeeds()">Pour connaître tes besoins en protéines, glucides, lipides</button>
+<button class="small-button" onclick="returnToForm()">Retourner au formulaire</button>
+</div>
 
-    <div class="container hidden" id="nutrient-container">
-        <h1>Besoins en macronutriments</h1>
-        <div class="circle-container">
-            <div class="circle" id="proteines" style="background-color: #FFA500;"><strong></strong><span>Protéines</span></div>
-            <div class="circle" id="glucides" style="background-color: #FFA500;"><strong></strong><span>Glucides</span></div>
-            <div class="circle" id="lipides" style="background-color: #FFA500;"><strong></strong><span>Lipides</span></div>
-        </div>
-        <div class="image-container">
-            <div class="image-button-container">
-                <img src="images/33PTDJ.jpg" alt="Image des macronutriments">
-                <button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/25e2/'">Acheter – 5.99€</button>
-            </div>
-            <div class="image-button-container">
-                <img src="images/imgprog1500.jpg" alt="Programme 1500">
-                <button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/1500en30jours/'">Acheter – 19.99€</button>
-            </div>
-            <div class="image-button-container">
-                <img src="images/imgprog1400.jpg" alt="Programme 1400">
-                <button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/140014jours/'">Acheter – 9.99€</button>
-            </div>
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-            <button class="small-button" onclick="returnToResults()">Retourner aux résultats</button>
-        </div>
-    </div>
+<div class="container hidden" id="nutrient-container">
+<h1>Besoins en macronutriments</h1>
+<div class="circle-container">
+<div class="circle" id="proteines" style="background-color: #FFA500;"><strong></strong><span>Protéines</span></div>
+<div class="circle" id="glucides" style="background-color: #FFA500;"><strong></strong><span>Glucides</span></div>
+<div class="circle" id="lipides" style="background-color: #FFA500;"><strong></strong><span>Lipides</span></div>
+</div>
+<div class="image-container">
+<div class="image-button-container">
+<img src="images/33PTDJ.jpg" alt="Image des macronutriments">
+<button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/25e2/'">Acheter – 5.99€</button>
+</div>
+<div class="image-button-container">
+<img src="images/imgprog1500.jpg" alt="Programme 1500">
+<button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/1500en30jours/'">Acheter – 19.99€</button>
+</div>
+<div class="image-button-container">
+<img src="images/imgprog1400.jpg" alt="Programme 1400">
+<button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/140014jours/'">Acheter – 9.99€</button>
+</div>
+</div>
+<div style="display: flex; justify-content: flex-end;">
+<button class="small-button" onclick="returnToResults()">Retourner aux résultats</button>
+</div>
+</div>
 
-    <script>
-        function calculateResults() {
-            // Récupérer les valeurs du formulaire
-            const sexe = document.getElementById('sexe').value;
-            const age = document.getElementById('age').value;
-            const poids = document.getElementById('poids').value;
-            const taille = document.getElementById('taille').value;
-            const activite = document.getElementById('activite').value;
+<script>
+function calculateResults() {
+// Récupérer les valeurs du formulaire
+const sexe = document.getElementById('sexe').value;
+const age = document.getElementById('age').value;
+const poids = document.getElementById('poids').value;
+const taille = document.getElementById('taille').value;
+const activite = document.getElementById('activite').value;
 
-            // Calculer les résultats (exemples de calculs)
-            const mb = Math.round(sexe === 'homme' ? 88.362 + (13.397 * poids) + (4.799 * taille) - (5.677 * age) : 447.593 + (9.247 * poids) + (3.098 * taille) - (4.330 * age));
-            const det = Math.round(mb * (activite === 'sedentaire' ? 1.2 : activite === 'legerement_actif' ? 1.375 : activite === 'moderement_actif' ? 1.55 : activite === 'tres_actif' ? 1.725 : 1.9));
-            const deficit500 = Math.round(det - 500);
-            const imc = Math.round(poids / ((taille / 100) ** 2));
-            const poidsIdeal = Math.round(sexe === 'homme' ? taille - 100 - ((taille - 150) / 4) : taille - 100 - ((taille - 150) / 2.5));
-            const pertePoids1500 = Math.round((det - 1500) * 30 / 7700);
-            const pertePoids1400 = Math.round((det - 1400) * 30 / 7700);
+// Calculer les résultats (exemples de calculs)
+const mb = Math.round(sexe === 'homme' ? 88.362 + (13.397 * poids) + (4.799 * taille) - (5.677 * age) : 447.593 + (9.247 * poids) + (3.098 * taille) - (4.330 * age));
+const det = Math.round(mb * (activite === 'sedentaire' ? 1.2 : activite === 'legerement_actif' ? 1.375 : activite === 'moderement_actif' ? 1.55 : activite === 'tres_actif' ? 1.725 : 1.9));
+const deficit500 = Math.round(det - 500);
+const imc = Math.round(poids / ((taille / 100) ** 2));
+const poidsIdeal = Math.round(sexe === 'homme' ? taille - 100 - ((taille - 150) / 4) : taille - 100 - ((taille - 150) / 2.5));
+const pertePoids1500 = Math.round((det - 1500) * 30 / 7700);
+const pertePoids1400 = Math.round((det - 1400) * 30 / 7700);
 
-            // Afficher les résultats
-            document.getElementById('mb').querySelector('strong').innerText = mb;
-            document.getElementById('det').querySelector('strong').innerText = det;
-            document.getElementById('deficit').querySelector('strong').innerText = deficit500;
-            document.getElementById('imc').querySelector('strong').innerText = imc;
-            document.getElementById('poids-perte-1500').innerText = pertePoids1500 + ' kg';
-            document.getElementById('poids-perte-1400').innerText = pertePoids1400 + ' kg';
-            document.getElementById('poids-ideal').innerText = poidsIdeal + ' kg';
+// Afficher les résultats
+document.getElementById('mb').querySelector('strong').innerText = mb;
+document.getElementById('det').querySelector('strong').innerText = det;
+document.getElementById('deficit').querySelector('strong').innerText = deficit500;
+document.getElementById('imc').querySelector('strong').innerText = imc;
+document.getElementById('poids-perte-1500').innerText = pertePoids1500 + ' kg';
+document.getElementById('poids-perte-1400').innerText = pertePoids1400 + ' kg';
+document.getElementById('poids-ideal').innerText = poidsIdeal + ' kg';
 
-            // Masquer le formulaire et afficher les résultats
-            document.getElementById('form-container').classList.add('hidden');
-            document.getElementById('results-container').classList.remove('hidden');
-        }
+// Masquer le formulaire et afficher les résultats
+document.getElementById('form-container').classList.add('hidden');
+document.getElementById('results-container').classList.remove('hidden');
+}
 
-        function showNutrientNeeds() {
-            // Exemple de calcul des besoins en macronutriments
-            const poids = document.getElementById('poids').value;
-            const besoinsProteines = Math.round(poids * 1.2); // Exemple : 1.2g de protéines par kg de poids corporel
-            const besoinsGlucides = Math.round(poids * 3); // Exemple : 3g de glucides par kg de poids corporel
-            const besoinsLipides = Math.round(poids * 0.8); // Exemple : 0.8g de lipides par kg de poids corporel
+function showNutrientNeeds() {
+// Exemple de calcul des besoins en macronutriments
+const poids = document.getElementById('poids').value;
+const activite = document.getElementById('activite').value;
+const facteurActivite = activite === 'sedentaire' ? 1.0 : activite === 'legerement_actif' ? 1.2 : activite === 'moderement_actif' ? 1.4 : activite === 'tres_actif' ? 1.6 : 1.8;
+const besoinsProteines = Math.round(poids * facteurActivite * 1.2);
+const besoinsGlucides = Math.round(poids * facteurActivite * 3);
+const besoinsLipides = Math.round(poids * facteurActivite * 0.8);
 
-            // Afficher les besoins en macronutriments
-            document.getElementById('proteines').querySelector('strong').innerText = besoinsProteines + 'g';
-            document.getElementById('glucides').querySelector('strong').innerText = besoinsGlucides + 'g';
-            document.getElementById('lipides').querySelector('strong').innerText = besoinsLipides + 'g';
+// Afficher les besoins en macronutriments
+document.getElementById('proteines').querySelector('strong').innerText = besoinsProteines + 'g';
+document.getElementById('glucides').querySelector('strong').innerText = besoinsGlucides + 'g';
+document.getElementById('lipides').querySelector('strong').innerText = besoinsLipides + 'g';
 
-            // Masquer les résultats et afficher les besoins en macronutriments
-            document.getElementById('results-container').classList.add('hidden');
-            document.getElementById('nutrient-container').classList.remove('hidden');
-        }
+// Masquer les résultats et afficher les besoins en macronutriments
+document.getElementById('results-container').classList.add('hidden');
+document.getElementById('nutrient-container').classList.remove('hidden');
+}
 
-        function returnToResults() {
-            // Masquer les besoins en macronutriments et afficher les résultats
-            document.getElementById('nutrient-container').classList.add('hidden');
-            document.getElementById('results-container').classList.remove('hidden');
-        }
+function returnToResults() {
+// Masquer les besoins en macronutriments et afficher les résultats
+document.getElementById('nutrient-container').classList.add('hidden');
+document.getElementById('results-container').classList.remove('hidden');
+}
 
-        function returnToForm() {
-            // Masquer les résultats et afficher le formulaire
-            document.getElementById('results-container').classList.add('hidden');
-            document.getElementById('form-container').classList.remove('hidden');
-            document.getElementById('nutrient-container').classList.add('hidden');
-        }
-    </script>
+function returnToForm() {
+// Masquer les résultats et afficher le formulaire
+document.getElementById('results-container').classList.add('hidden');
+document.getElementById('form-container').classList.remove('hidden');
+document.getElementById('nutrient-container').classList.add('hidden');
+}
+</script>
 </body>
 </html>

@@ -242,7 +242,7 @@
             </div>
         </div>
         <div class="ideal-weight-box">
-            <p>Ton poids idéal selon la formule de Lorentz est de <span id="poids-ideal" class="highlight"></span>.</p>
+            <p>Ton poids idéal selon la formule de Lorentz est de <span id="poids-ideal" class="highlight"></span> kg.</p>
         </div>
         <button class="nutrient-button" onclick="showNutrientNeeds()">Pour connaître tes besoins en protéines, glucides, lipides</button>
 <button class="small-button" onclick="returnToForm()">Retourner au formulaire</button>
@@ -289,8 +289,8 @@
             const deficit500 = Math.round(det - 500);
             const imc = Math.round(poids / ((taille / 100) ** 2));
             const poidsIdeal = Math.round(sexe === 'homme' ? taille - 100 - ((taille - 150) / 4) : taille - 100 - ((taille - 150) / 2.5));
-            const pertePoids1500 = Math.round((det - 1500) * 30 / 7700);
-            const pertePoids1400 = Math.round((det - 1400) * 30 / 7700);
+            const pertePoids1500 = ((det - 1500) * 30 / 7700).toFixed(1);
+            const pertePoids1400 = ((det - 1400) * 30 / 7700).toFixed(1);
 
             // Afficher les résultats
             document.getElementById('mb').querySelector('strong').innerText = mb;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculateur métabolique</title>
     <style>
+        /* Styles existants */
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -105,23 +106,6 @@
             height: 100px;
             border-radius: 10px;
         }
-        .ideal-weight-box {
-            padding: 10px;
-            margin-bottom: 20px;
-            width: 100%;
-            text-align: center;
-        }
-        .ideal-weight-box p {
-            text-align: center;
-        }
-        .ideal-weight-box span {
-            background-color: #800080;
-            color: #ffffff;
-            padding: 5px;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
-        }
         .highlight {
             background-color: #008080;
             color: #ffffff;
@@ -212,6 +196,8 @@
                 <option value="tres_actif">Très actif</option>
                 <option value="extremement_actif">Extrêmement actif</option>
             </select>
+            <label for="objectif">Combien de kg souhaite tu perdre ?</label>
+            <input type="number" id="objectif" name="objectif">
             <button type="button" onclick="calculateResults()">Continuer vers les résultats</button>
         </form>
     </div>
@@ -226,7 +212,7 @@
         <div class="result-box-container">
             <div class="result-box" style="width: calc(100% - 20px);">
                 <div>
-                    <p>Avec un apport quotidien de 1500 calories ta perte de poids est estimée à <span id="poids-perte-1500" class="highlight"></span> par mois.</p>
+                    <p>Avec le programme déficit 1500 calories ta perte de poids est estimée à <span id="poids-perte-1500" class="highlight"></span> par mois, tu atteindras ton objectif en <span id="objectif-1500" class="highlight"></span> mois.</p>
                     <button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/1500en30jours/'">Acheter le programme 1500 – 19.99€</button>
                 </div>
                 <img src="images/imgprog1500.jpg" alt="Programme 1500">
@@ -235,20 +221,17 @@
         <div class="result-box-container">
             <div class="result-box" style="width: calc(100% - 20px);">
                 <div>
-                    <p>Avec un apport quotidien de 1400 calories ta perte de poids est estimée à <span id="poids-perte-1400" class="highlight"></span> par mois.</p>
+                    <p>Avec le programme déficit 1400 calories ta perte de poids est estimée à <span id="poids-perte-1400" class="highlight"></span> par mois, tu atteindras ton objectif en <span id="objectif-1400" class="highlight"></span> mois.</p>
                     <button class="buy-button" onclick="window.location.href='https://kcoaching.taplink.ws/d/140014jours/'">Acheter le programme 1400 – 9.99€</button>
                 </div>
                 <img src="images/imgprog1400.jpg" alt="Programme 1400">
             </div>
         </div>
-        <div class="ideal-weight-box">
-            <p>Ton poids idéal selon la formule de Lorentz est de <span id="poids-ideal" class="highlight"></span> kg.</p>
-        </div>
         <button class="nutrient-button" onclick="showNutrientNeeds()">Pour connaître tes besoins en protéines, glucides, lipides</button>
-<button class="small-button" onclick="returnToForm()">Retourner au formulaire</button>
+        <button class="small-button" onclick="returnToForm()">Retourner au formulaire</button>
     </div>
 
-    <div class="container hidden" id="nutrient-container">
+        <div class="container hidden" id="nutrient-container">
         <h1>Besoins en macronutriments</h1>
         <div class="circle-container">
             <div class="circle" id="proteines" style="background-color: #FFA500;"><strong></strong><span>Protéines</span></div>
@@ -282,15 +265,17 @@
             const poids = document.getElementById('poids').value;
             const taille = document.getElementById('taille').value;
             const activite = document.getElementById('activite').value;
+            const objectif = document.getElementById('objectif').value;
 
             // Calculer les résultats (exemples de calculs)
             const mb = Math.round(sexe === 'homme' ? 88.362 + (13.397 * poids) + (4.799 * taille) - (5.677 * age) : 447.593 + (9.247 * poids) + (3.098 * taille) - (4.330 * age));
             const det = Math.round(mb * (activite === 'sedentaire' ? 1.2 : activite === 'legerement_actif' ? 1.375 : activite === 'moderement_actif' ? 1.55 : activite === 'tres_actif' ? 1.725 : 1.9));
             const deficit500 = Math.round(det - 500);
             const imc = Math.round(poids / ((taille / 100) ** 2));
-            const poidsIdeal = Math.round(sexe === 'homme' ? taille - 100 - ((taille - 150) / 4) : taille - 100 - ((taille - 150) / 2.5));
             const pertePoids1500 = ((det - 1500) * 30 / 7700).toFixed(1);
             const pertePoids1400 = ((det - 1400) * 30 / 7700).toFixed(1);
+            const objectif1500 = (objectif / pertePoids1500).toFixed(1);
+            const objectif1400 = (objectif / pertePoids1400).toFixed(1);
 
             // Afficher les résultats
             document.getElementById('mb').querySelector('strong').innerText = mb;
@@ -299,7 +284,8 @@
             document.getElementById('imc').querySelector('strong').innerText = imc;
             document.getElementById('poids-perte-1500').innerText = pertePoids1500 + ' kg';
             document.getElementById('poids-perte-1400').innerText = pertePoids1400 + ' kg';
-            document.getElementById('poids-ideal').innerText = poidsIdeal + ' kg';
+            document.getElementById('objectif-1500').innerText = objectif1500 + ' mois';
+            document.getElementById('objectif-1400').innerText = objectif1400 + ' mois';
 
             // Masquer le formulaire et afficher les résultats
             document.getElementById('form-container').classList.add('hidden');

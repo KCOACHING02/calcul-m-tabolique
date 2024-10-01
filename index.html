@@ -85,7 +85,7 @@
             border: 2px solid #008080;
             padding: 10px;
             margin-bottom: 20px;
-            width: 48%;
+            width: 100%; /* Ajusté pour prendre toute la largeur */
             text-align: center;
             display: flex;
             flex-direction: row;
@@ -94,8 +94,8 @@
         }
         .result-box-container {
             display: flex;
-            justify-content: center;
-            gap: 2%;
+            flex-direction: column; /* Modifié pour aligner les encadrés verticalement */
+            gap: 20px; /* Ajouté pour espacer les encadrés */
         }
         .result-box button {
             background-color: #FFD700;
@@ -110,11 +110,7 @@
             width: 110px; /* Agrandir de 10% */
             height: 110px; /* Agrandir de 10% */
             border-radius: 10px;
-            animation: blink 2s infinite; /* Animation de clignotement moins rapide */
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            /* Animation de clignotement supprimée */
         }
         .highlight {
             background-color: #008080;
@@ -148,7 +144,7 @@
         .image-container img {
             width: 110px; /* Agrandir de 10% */
             height: auto;
-            animation: blink 2s infinite; /* Animation de clignotement moins rapide */
+            /* Animation de clignotement supprimée */
         }
         .image-button-container {
             display: flex;
@@ -239,9 +235,9 @@
         <button class="small-button" onclick="returnToForm()">Retourner au formulaire</button>
     </div>
     <div class="container hidden" id="nutrient-container">
-                <h1>Besoins en macronutriments</h1>
+        <h1>Besoins en macronutriments</h1>
         <div class="circle-container">
-            <div class="circle" id="proteines" style="background-color: #FFA500;"><strong></strong><span>Protéines</span></div>
+                        <div class="circle" id="proteines" style="background-color: #FFA500;"><strong></strong><span>Protéines</span></div>
             <div class="circle" id="glucides" style="background-color: #FFA500;"><strong></strong><span>Glucides</span></div>
             <div class="circle" id="lipides" style="background-color: #FFA500;"><strong></strong><span>Lipides</span></div>
         </div>
@@ -331,3 +327,5 @@
     </script>
 </body>
 </html>
+
+

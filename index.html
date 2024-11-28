@@ -23,6 +23,12 @@
             max-width: 600px;
             text-align: center;
         }
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 100px; /* Taille du logo */
+            height: auto;
+        }
         h1 {
             text-align: center;
         }
@@ -167,12 +173,6 @@
             margin-top: 20px;
             align-self: flex-end;
         }
-        .logo {
-            display: block;
-            margin: 0 auto 20px auto;
-            width: 50px; /* Taille divisée par 2 */
-            height: auto;
-        }
         @media (max-width: 600px) {
             .button {
                 width: 120px;
@@ -193,6 +193,7 @@
 </head>
 <body>
     <div class="container" id="welcome-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Bienvenue sur le Calculateur Métabolique</h1>
         <div class="button-container">
             <button class="button button-femme" onclick="showForm('femme')">
@@ -205,6 +206,7 @@
     </div>
 
     <div class="container hidden" id="age-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Calculateur métabolique</h1>
         <form id="age-form">
             <label for="age">Âge :</label>
@@ -214,6 +216,7 @@
     </div>
 
     <div class="container hidden" id="poids-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Calculateur métabolique</h1>
         <form id="poids-form">
             <label for="poids">Poids :</label>
@@ -223,6 +226,7 @@
     </div>
 
     <div class="container hidden" id="taille-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Calculateur métabolique</h1>
         <form id="taille-form">
             <label for="taille">Taille (en cm) :</label>
@@ -232,6 +236,7 @@
     </div>
 
     <div class="container hidden" id="activite-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Calculateur métabolique</h1>
         <form id="activite-form">
             <label for="activite">Niveau d’activité physique :</label>
@@ -247,6 +252,7 @@
     </div>
 
     <div class="container hidden" id="objectif-container">
+        <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Calculateur métabolique</h1>
         <form id="objectif-form">
             <label for="objectif">Combien de kg souhaite tu perdre ?</label>
@@ -289,7 +295,7 @@
             </div>
         </div>
         <div class="button-container">
-            <button class="small-button" onclick="returnToForm()">Retourner au formulaire</button>
+            <button class="small-button" onclick="returnToHome()">Retourner au formulaire</button>
         </div>
     </div>
 
@@ -337,10 +343,10 @@
             document.getElementById('results-container').classList.remove('hidden');
         }
 
-        function returnToForm() {
-            // Masquer les résultats et afficher le formulaire
+        function returnToHome() {
+            // Masquer les résultats et afficher la page d'accueil
             document.getElementById('results-container').classList.add('hidden');
-            document.getElementById('age-container').classList.remove('hidden');
+            document.getElementById('welcome-container').classList.remove('hidden');
         }
     </script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

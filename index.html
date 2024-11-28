@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculateur métabolique</title>
     <style>
-        /* Styles existants */
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -20,11 +19,52 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
+            width: 90%;
             max-width: 600px;
+            text-align: center;
         }
         h1 {
             text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .button-femme {
+            background: linear-gradient(135deg, #ff69b4, #ff1493); /* Dégradé rose */
+        }
+        .button-homme {
+            background: linear-gradient(135deg, #1e90ff, #00bfff); /* Dégradé bleu */
+        }
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .button i {
+            margin-right: 10px;
+        }
+        .hidden {
+            display: none;
         }
         form {
             display: flex;
@@ -54,15 +94,13 @@
             cursor: pointer;
             font-weight: bold;
         }
-        .hidden {
-            display: none;
-        }
         .circle-container {
             display: flex;
             justify-content: space-around;
             width: 100%;
             margin-bottom: 20px;
             margin-top: 40px;
+            flex-wrap: wrap;
         }
         .circle {
             background-color: #008080;
@@ -78,53 +116,44 @@
             font-weight: bold;
             font-size: 20px;
             border: 2px solid #FFD700;
+            margin: 10px;
         }
         .circle span {
             font-weight: normal;
             font-size: 14px;
         }
         .result-box {
-            border: 2px solid #008080;
             padding: 10px;
             margin-bottom: 10px;
             width: 100%;
             text-align: center;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #ffffff; /* Changer le fond en blanc */
+            border-radius: 5px;
         }
         .result-box-container {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        .result-box button {
-            background-color: #FFD700;
-            color: #000000;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
         .result-box img {
-            width: 110px;
-            height: 110px;
+            width: 150px; /* Agrandir les images */
+            height: 150px;
             border-radius: 10px;
+            margin: 0 auto;
         }
         .highlight {
-            background-color: #008080;
-            color: #ffffff;
+            background-color: #FFD700; /* Fond jaune pour le texte */
+            color: #000000;
             padding: 5px;
             border-radius: 5px;
             font-weight: bold;
             display: inline-block;
-        }
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
+            margin-top: 10px; /* Ajouter un espace entre l'image et le texte */
         }
         .small-button {
             padding: 5px 10px;
@@ -143,23 +172,67 @@
             width: 50px; /* Taille divisée par 2 */
             height: auto;
         }
+        @media (max-width: 600px) {
+            .button {
+                width: 120px;
+                height: 120px;
+                font-size: 16px;
+            }
+            .circle {
+                width: 80px;
+                height: 80px;
+                font-size: 16px;
+            }
+            .result-box img {
+                width: 120px; /* Agrandir les images pour les petits écrans */
+                height: 120px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container" id="form-container">
+    <div class="container" id="welcome-container">
+        <h1>Bienvenue sur le Calculateur Métabolique</h1>
+        <div class="button-container">
+            <button class="button button-femme" onclick="showForm('femme')">
+                <i class="fas fa-female"></i> Je suis une femme
+            </button>
+            <button class="button button-homme" onclick="showForm('homme')">
+                <i class="fas fa-male"></i> Je suis un homme
+            </button>
+        </div>
+    </div>
+
+    <div class="container hidden" id="age-container">
         <h1>Calculateur métabolique</h1>
-        <form id="metabolic-form">
-            <label for="sexe">Sexe :</label>
-            <select id="sexe" name="sexe">
-                <option value="femme">Femme</option>
-                <option value="homme">Homme</option>
-            </select>
+        <form id="age-form">
             <label for="age">Âge :</label>
             <input type="number" id="age" name="age">
+            <button type="button" onclick="showNext('poids')">Suivant</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="poids-container">
+        <h1>Calculateur métabolique</h1>
+        <form id="poids-form">
             <label for="poids">Poids :</label>
             <input type="number" id="poids" name="poids">
+            <button type="button" onclick="showNext('taille')">Suivant</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="taille-container">
+        <h1>Calculateur métabolique</h1>
+        <form id="taille-form">
             <label for="taille">Taille (en cm) :</label>
             <input type="number" id="taille" name="taille">
+            <button type="button" onclick="showNext('activite')">Suivant</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="activite-container">
+        <h1>Calculateur métabolique</h1>
+        <form id="activite-form">
             <label for="activite">Niveau d’activité physique :</label>
             <select id="activite" name="activite">
                 <option value="sedentaire">Sédentaire</option>
@@ -168,11 +241,19 @@
                 <option value="tres_actif">Très actif</option>
                 <option value="extremement_actif">Extrêmement actif</option>
             </select>
+            <button type="button" onclick="showNext('objectif')">Suivant</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="objectif-container">
+        <h1>Calculateur métabolique</h1>
+        <form id="objectif-form">
             <label for="objectif">Combien de kg souhaite tu perdre ?</label>
             <input type="number" id="objectif" name="objectif">
             <button type="button" onclick="calculateResults()">Continuer vers les résultats</button>
         </form>
     </div>
+
     <div class="container hidden" id="results-container">
         <h1>Ton métabolisme</h1>
         <div class="circle-container">
@@ -185,15 +266,19 @@
             <div class="result-box">
                 <img src="images/imgprog1500.png" alt="Programme 1500">
                 <div>
-                    <p>Avec le <strong>Challenge 4 semaines</strong> tu atteins ton objectif dans <span id="objectif-1500" class="highlight"></span>.</p>
-                    <button class="buy-button" onclick="window.open('https://taplink.cc/kcoaching/d/1500en30jours/', '_blank')">Acheter maintenant</button>
+                    <p class="highlight">Perte de poids estimée en 3 mois : <span id="perte-1500"></span> kg</p>
                 </div>
             </div>
             <div class="result-box">
                 <img src="images/imgprog1400.png" alt="Programme 1400">
                 <div>
-                    <p>Avec le <strong>défi 14 jours</strong> tu atteins ton objectif dans <span id="objectif-1400" class="highlight"></span>.</p>
-                    <button class="buy-button" onclick="window.open('https://taplink.cc/kcoaching/d/140014jours/', '_blank')">Acheter maintenant</button>
+                    <p class="highlight">Perte de poids estimée en 3 mois : <span id="perte-1400"></span> kg</p>
+                </div>
+            </div>
+            <div class="result-box">
+                <img src="images/imgprog1300.png" alt="Programme 1300">
+                <div>
+                    <p class="highlight">Perte de poids estimée en 3 mois : <span id="perte-1300"></span> kg</p>
                 </div>
             </div>
         </div>
@@ -202,15 +287,22 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
-        (function() {
-            emailjs.init("service_sqyzz46"); // Utilisez votre user ID EmailJS
-        })();
+        function showForm(sexe) {
+            localStorage.setItem('sexe', sexe);
+            document.getElementById('welcome-container').classList.add('hidden');
+            document.getElementById('age-container').classList.remove('hidden');
+        }
+
+        function showNext(containerId) {
+            const currentContainer = document.querySelector('.container:not(.hidden)');
+            currentContainer.classList.add('hidden');
+            document.getElementById(containerId + '-container').classList.remove('hidden');
+        }
 
         function calculateResults() {
             // Récupérer les valeurs du formulaire
-            const sexe = document.getElementById('sexe').value;
+            const sexe = localStorage.getItem('sexe');
             const age = document.getElementById('age').value;
             const poids = document.getElementById('poids').value;
             const taille = document.getElementById('taille').value;
@@ -220,54 +312,32 @@
             // Calculer les résultats (exemples de calculs)
             const mb = Math.round(sexe === 'homme' ? 88.362 + (13.397 * poids) + (4.799 * taille) - (5.677 * age) : 447.593 + (9.247 * poids) + (3.098 * taille) - (4.330 * age));
             const maintien = Math.round(mb * (activite === 'sedentaire' ? 1.2 : activite === 'legerement_actif' ? 1.375 : activite === 'moderement_actif' ? 1.55 : activite === 'tres_actif' ? 1.725 : 1.9));
-const deficit500 = Math.round(maintien - 500);
-const imc = Math.round(poids / ((taille / 100) ** 2));
-const pertePoids1500 = ((maintien - 1500) * 30 / 7700).toFixed(1);
-const pertePoids1400 = ((maintien - 1400) * 30 / 7700).toFixed(1);
-const objectif1500 = (objectif / pertePoids1500).toFixed(1);
-const objectif1400 = (objectif / pertePoids1400).toFixed(1);
+            const deficit500 = Math.round(maintien - 500);
+            const imc = Math.round(poids / ((taille / 100) ** 2));
+            const pertePoids1500 = ((maintien - 1500) * 90 / 7700).toFixed(1); // Calcul sur 3 mois
+            const pertePoids1400 = ((maintien - 1400) * 90 / 7700).toFixed(1); // Calcul sur 3 mois
+            const pertePoids1300 = ((maintien - 1300) * 90 / 7700).toFixed(1); // Calcul sur 3 mois
 
-// Afficher les résultats
-document.getElementById('mb').querySelector('strong').innerText = mb;
-document.getElementById('maintien').querySelector('strong').innerText = maintien;
-document.getElementById('deficit').querySelector('strong').innerText = deficit500;
-document.getElementById('imc').querySelector('strong').innerText = imc;
-document.getElementById('objectif-1500').innerText = objectif1500 + ' mois';
-document.getElementById('objectif-1400').innerText = objectif1400 + ' mois';
+            // Afficher les résultats
+            document.getElementById('mb').querySelector('strong').innerText = mb;
+            document.getElementById('maintien').querySelector('strong').innerText = maintien;
+            document.getElementById('deficit').querySelector('strong').innerText = deficit500;
+            document.getElementById('imc').querySelector('strong').innerText = imc;
+            document.getElementById('perte-1500').innerText = pertePoids1500;
+            document.getElementById('perte-1400').innerText = pertePoids1400;
+            document.getElementById('perte-1300').innerText = pertePoids1300;
 
-// Masquer le formulaire et afficher les résultats
-document.getElementById('form-container').classList.add('hidden');
-document.getElementById('results-container').classList.remove('hidden');
+            // Masquer le formulaire et afficher les résultats
+            document.getElementById('objectif-container').classList.add('hidden');
+            document.getElementById('results-container').classList.remove('hidden');
+        }
 
-// Envoyer les résultats par email
-const formData = {
-    user_sexe: sexe,
-    user_age: age,
-    user_poids: poids,
-    user_taille: taille,
-    user_activite: activite,
-    user_objectif: objectif,
-    user_mb: mb,
-    user_maintien: maintien,
-    user_deficit: deficit500,
-    user_imc: imc,
-    user_objectif1500: objectif1500,
-    user_objectif1400: objectif1400
-};
-
-emailjs.send('service_sqyzz46', 'template_pqljgzj', formData)
-    .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-    }, function(error) {
-        console.log('FAILED...', error);
-    });
-}
-
-function returnToForm() {
-    // Masquer les résultats et afficher le formulaire
-    document.getElementById('results-container').classList.add('hidden');
-    document.getElementById('form-container').classList.remove('hidden');
-}
-</script>
+        function returnToForm() {
+            // Masquer les résultats et afficher le formulaire
+            document.getElementById('results-container').classList.add('hidden');
+            document.getElementById('age-container').classList.remove('hidden');
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

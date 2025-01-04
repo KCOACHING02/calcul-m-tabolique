@@ -13,13 +13,15 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
         }
         .container {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
+            width: 100%;
             max-width: 600px;
             text-align: center;
         }
@@ -31,6 +33,7 @@
         }
         h1 {
             text-align: center;
+            font-size: 24px;
         }
         .button-container {
             display: flex;
@@ -43,13 +46,14 @@
             padding: 15px;
             margin: 10px;
             border: none;
-            border-radius: 5px; /* Modifier la forme des boutons pour qu'ils soient rectangulaires */
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 14px; /* Réduire la taille des caractères */
+            font-size: 14px;
             font-weight: bold;
             color: #ffffff;
-            width: 200px;
-            height: 100px; /* Ajuster la hauteur pour les rendre rectangulaires */
+            width: 100%;
+            max-width: 200px;
+            height: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -57,10 +61,10 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .button-femme {
-            background: linear-gradient(135deg, #ff69b4, #ff1493); /* Dégradé rose */
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
         }
         .button-homme {
-            background: linear-gradient(135deg, #1e90ff, #00bfff); /* Dégradé bleu */
+            background: linear-gradient(135deg, #1e90ff, #00bfff);
         }
         .button:hover {
             transform: scale(1.1);
@@ -76,6 +80,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
         }
         label {
             font-weight: bold;
@@ -83,7 +88,8 @@
             align-self: flex-start;
         }
         input, select {
-            width: 30%; /* Réduire la largeur des champs à compléter */
+            width: 100%;
+            max-width: 300px;
             padding: 10px;
             margin-top: 5px;
             background-color: #e0e0e0;
@@ -99,21 +105,22 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            max-width: 200px;
         }
         .circle-container {
             display: flex;
             justify-content: space-around;
             width: 100%;
             margin-bottom: 20px;
-            margin-top: 60px; /* Augmenter l'espace entre les cercles et le bord haut de la page */
-            flex-wrap: wrap; /* Permettre aux cercles de s'ajuster sur plusieurs lignes si nécessaire */
+            margin-top: 60px;
+            flex-wrap: wrap;
         }
         .circle {
             background-color: #008080;
             color: #ffffff;
             border-radius: 50%;
-            width: 150px; /* Augmenter la taille des cercles */
-            height: 150px; /* Augmenter la taille des cercles */
+            width: 150px;
+            height: 150px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -123,7 +130,7 @@
             font-size: 16px;
             border: 2px solid #FFD700;
             margin: 10px;
-            box-sizing: border-box; /* Assurer que les cercles s'affichent entièrement */
+            box-sizing: border-box;
         }
         .circle span {
             font-weight: normal;
@@ -139,7 +146,7 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            background-color: #ffffff; /* Changer le fond en blanc */
+            background-color: #ffffff;
             border-radius: 5px;
         }
         .result-box-container {
@@ -148,20 +155,20 @@
             gap: 10px;
         }
         .result-box img {
-            width: 150px; /* Agrandir les images */
+            width: 150px;
             height: 150px;
             border-radius: 10px;
             margin: 0 auto;
         }
         .highlight {
-            background-color: #FFD700; /* Fond jaune pour le texte */
+            background-color: #FFD700;
             color: #000000;
             padding: 5px;
             border-radius: 5px;
             font-weight: bold;
             display: inline-block;
-            margin-top: 10px; /* Ajouter un espace entre l'image et le texte */
-            text-decoration: none; /* Supprimer le soulignement */
+            margin-top: 10px;
+            text-decoration: none;
         }
         .small-button {
             padding: 5px 10px;
@@ -176,18 +183,19 @@
         }
         @media (max-width: 600px) {
             .button {
-                width: 120px;
-                height: 40px; /* Ajuster la hauteur pour les petits écrans */
-                font-size: 12px; /* Réduire encore la taille des caractères pour les petits écrans */
+                width: 100%;
+                height: auto;
+                padding: 10px;
+                font-size: 14px;
             }
             .circle {
-                width: 120px; /* Ajuster la taille des cercles pour les petits écrans */
-                height: 120px;
+                width: 100px;
+                height: 100px;
                 font-size: 14px;
             }
             .result-box img {
-                width: 120px; /* Ajuster les images pour les petits écrans */
-                height: 120px;
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
@@ -257,7 +265,7 @@
         <h1>Calculateur métabolique</h1>
         <form id="objectif-form">
             <label for="objectif">Combien de kg souhaite tu perdre ?</label>
-            <input type="number" id="objectif" name="objectif">
+                        <input type="number" id="objectif" name="objectif">
             <button type="button" onclick="calculateResults()">Continuer vers les résultats</button>
         </form>
     </div>
@@ -272,7 +280,7 @@
         <div class="result-box-container">
             <div class="result-box">
                 <a href="https://taplink.cc/kcoaching/d/nouveauprogramme/" target="_blank">
-                    <img src="Challenge49jours.png" alt="Nouveau Programme 49 jours">
+                    <img src="Challenge49jours.PNG" alt="Nouveau Programme 49 jours">
                 </a>
                 <div>
                     <a href="https://taplink.cc/kcoaching/d/nouveauprogramme/" target="_blank" class="highlight">Perte de poids estimée en 3 mois : <span id="perte-49jours"></span> kg</a>

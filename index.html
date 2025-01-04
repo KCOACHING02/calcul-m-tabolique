@@ -106,7 +106,7 @@
             width: 100%;
             margin-bottom: 20px;
             margin-top: 60px; /* Augmenter l'espace entre les cercles et le bord haut de la page */
-            flex-wrap: nowrap; /* Placer les cercles en ligne côte à côte */
+            flex-wrap: wrap; /* Permettre aux cercles de s'ajuster sur plusieurs lignes si nécessaire */
         }
         .circle {
             background-color: #008080;
@@ -242,8 +242,8 @@
         <form id="activite-form">
             <label for="activite">Niveau d’activité physique :</label>
             <select id="activite" name="activite">
-                <option value="sedentaire">Sédentaire</option>
-                                <option value="legerement_actif">Légèrement actif</option>
+                <option value="sedentaire">Sédentaire
+                <option value="legerement_actif">Légèrement actif</option>
                 <option value="moderement_actif">Modérément actif</option>
                 <option value="tres_actif">Très actif</option>
                 <option value="extremement_actif">Extrêmement actif</option>

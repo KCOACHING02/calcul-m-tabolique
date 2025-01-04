@@ -243,7 +243,7 @@
             <label for="activite">Niveau d’activité physique :</label>
             <select id="activite" name="activite">
                 <option value="sedentaire">Sédentaire</option>
-                <option value="legerement_actif">Légèrement actif</option>
+                                <option value="legerement_actif">Légèrement actif</option>
                 <option value="moderement_actif">Modérément actif</option>
                 <option value="tres_actif">Très actif</option>
                 <option value="extremement_actif">Extrêmement actif</option>
@@ -270,6 +270,14 @@
             <div class="circle" id="deficit"><strong></strong><span>Déficit 500</span></div>
         </div>
         <div class="result-box-container">
+            <div class="result-box">
+                <a href="https://taplink.cc/kcoaching/d/nouveauprogramme/" target="_blank">
+                    <img src="Challenge49jours.PNG" alt="Nouveau Programme 49 jours">
+                </a>
+                <div>
+                    <a href="https://taplink.cc/kcoaching/d/nouveauprogramme/" target="_blank" class="highlight">Perte de poids estimée en 3 mois : <span id="perte-49jours"></span> kg</a>
+                </div>
+            </div>
             <div class="result-box">
                 <a href="https://taplink.cc/kcoaching/d/1500en30jours/" target="_blank">
                     <img src="Challenge4semaines.PNG" alt="Programme 1500">
@@ -327,9 +335,15 @@
             const maintien = Math.round(mb * (activite === 'sedentaire' ? 1.2 : activite === 'legerement_actif' ? 1.375 : activite === 'moderement_actif' ? 1.55 : activite === 'tres_actif' ? 1.725 : 1.9));
             const deficit500 = Math.round(maintien - 500);
             const imc = Math.round(poids / ((taille / 100) ** 2));
+
+            // Calcul des pertes de poids
             const pertePoids1500 = ((maintien - 1500) * 90 / 7700).toFixed(1); // Calcul sur 3 mois
             const pertePoids1400 = ((maintien - 1400) * 90 / 7700).toFixed(1); // Calcul sur 3 mois
             const pertePoids1300 = ((maintien - 1300) * 90 / 7700).toFixed(1); // Calcul sur 3 mois
+
+            // Calcul pour le nouveau programme de 49 jours
+            const perte49jours = (((maintien - 1300) * 7) + ((maintien - 1400) * 14) + ((maintien - 1500) * 28)) / 7700;
+            const pertePoids49jours = (perte49jours * 90 / 49).toFixed(1); // Extrapolation sur 3 mois
 
             // Afficher les résultats
             document.getElementById('mb').querySelector('strong').innerText = mb;
@@ -338,6 +352,7 @@
             document.getElementById('perte-1500').innerText = pertePoids1500;
             document.getElementById('perte-1400').innerText = pertePoids1400;
             document.getElementById('perte-1300').innerText = pertePoids1300;
+            document.getElementById('perte-49jours').innerText = pertePoids49jours;
 
             // Masquer le formulaire et afficher les résultats
             document.getElementById('objectif-container').classList.add('hidden');

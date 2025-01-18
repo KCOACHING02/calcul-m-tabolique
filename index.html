@@ -261,7 +261,7 @@
         </form>
     </div>
 
-            <div class="container hidden" id="objectif-container">
+       <div class="container hidden" id="objectif-container">
         <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Dernière étape!</h1>
         <form id="objectif-form">
@@ -280,6 +280,7 @@
         </div>
         <!-- Ajout de la catégorie IMC sous les cercles -->
         <div id="categorie-imc" style="font-weight: bold; margin-bottom: 20px;"></div>
+        <div id="poids-normal" style="margin-bottom: 20px;"></div>
         <div class="result-box-container">
             <div class="result-box">
                 <a href="https://taplink.cc/kcoaching/d/Challenge49jours/" target="_blank">
@@ -372,6 +373,14 @@
             const perte49jours = (((maintien - 1300) * 7) + ((maintien - 1400) * 14) + ((maintien - 1500) * 28)) / 7700;
             const pertePoids49jours = (perte49jours * 90 / 49).toFixed(1); // Extrapolation sur 3 mois
 
+            // Calcul du poids à perdre pour atteindre un poids normal
+            let poidsNormalMin = 18.5 * ((taille / 100) ** 2);
+            let poidsNormalMax = 24.9 * ((taille / 100) ** 2);
+            let poidsAPerdre = 0;
+            if (imc >= 25) {
+                poidsAPerdre = (poids - poidsNormalMax).toFixed(1);
+            }
+
             // Afficher les résultats
             document.getElementById('mb').querySelector('strong').innerText = mb;
             document.getElementById('maintien').querySelector('strong').innerText = maintien;
@@ -384,6 +393,14 @@
             // Afficher la catégorie IMC et la recommandation
             const categorieIMCElement = document.getElementById('categorie-imc');
             categorieIMCElement.innerHTML = `<strong>Catégorie IMC :</strong> ${categorieIMC}<br>${recommandation}`;
+
+            // Afficher le poids à perdre pour atteindre un poids normal si en surpoids ou obésité
+            const poidsNormalElement = document.getElementById('poids-normal');
+            if (poidsAPerdre > 0) {
+                poidsNormalElement.innerHTML = `Pour atteindre un poids normal (IMC entre 18.5 et 24.9), tu devrais perdre environ ${poidsAPerdre} kg.`;
+            } else {
+                poidsNormalElement.innerHTML = '';
+            }
 
             // Masquer le formulaire et afficher les résultats
             document.getElementById('objectif-container').classList.add('hidden');
@@ -399,3 +416,4 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
+

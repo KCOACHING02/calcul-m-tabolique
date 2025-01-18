@@ -261,7 +261,7 @@
         </form>
     </div>
 
-        <div class="container hidden" id="objectif-container">
+            <div class="container hidden" id="objectif-container">
         <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Dernière étape!</h1>
         <form id="objectif-form">
@@ -348,14 +348,19 @@
 
             // Déterminer la catégorie IMC
             let categorieIMC = '';
+            let recommandation = '';
             if (imc < 18.5) {
                 categorieIMC = 'Insuffisance pondérale';
+                recommandation = 'Recommandation : Essaye de prendre du poids sainement, mange plusieurs fois dans la journée, augmente ton apport calorique quotidien';
             } else if (imc < 25) {
                 categorieIMC = 'Poids normal';
+                recommandation = 'Bravo continue comme ça! Ton poids est considéré comme sain!';
             } else if (imc < 30) {
                 categorieIMC = 'Surpoids';
+                recommandation = 'Tu dois réfléchir sérieusement à perdre du poids, je vais t\'aider à y arriver, commence ta perte de poids avec les programmes adaptés à ta situation ci dessous!';
             } else {
                 categorieIMC = 'Obésité';
+                recommandation = 'Tu dois réfléchir sérieusement à perdre du poids, je vais t\'aider à y arriver, commence ta perte de poids avec les programmes adaptés à ta situation ci dessous!';
             }
 
             // Calcul des pertes de poids
@@ -376,9 +381,9 @@
             document.getElementById('perte-1300').innerText = pertePoids1300;
             document.getElementById('perte-49jours').innerText = pertePoids49jours;
 
-            // Afficher la catégorie IMC
+            // Afficher la catégorie IMC et la recommandation
             const categorieIMCElement = document.getElementById('categorie-imc');
-            categorieIMCElement.innerText = `Catégorie IMC : ${categorieIMC}`;
+            categorieIMCElement.innerHTML = `<strong>Catégorie IMC :</strong> ${categorieIMC}<br>${recommandation}`;
 
             // Masquer le formulaire et afficher les résultats
             document.getElementById('objectif-container').classList.add('hidden');
@@ -394,5 +399,3 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
-
-

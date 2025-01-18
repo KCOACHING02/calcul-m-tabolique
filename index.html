@@ -257,11 +257,11 @@
                 <option value="tres_actif">Très actif</option>
                 <option value="extremement_actif">Extrêmement actif</option>
             </select>
-            <button type="button" onclick="showNext('objectif')">Suivant</button>
+                    <button type="button" onclick="showNext('objectif')">Suivant</button>
         </form>
     </div>
 
-    <div class="container hidden" id="objectif-container"
+    <div class="container hidden" id="objectif-container">
         <img src="logo.jpg" alt="Logo" class="logo">
         <h1>Calculateur métabolique</h1>
         <form id="objectif-form">
@@ -276,7 +276,7 @@
         <div class="circle-container">
             <div class="circle" id="mb"><strong></strong><span>MB</span></div>
             <div class="circle" id="maintien"><strong></strong><span>Maintien</span></div>
-            <div class="circle" id="deficit"><strong></strong><span>Déficit 500</span></div>
+            <div class="circle" id="imc"><strong></strong><span>IMC</span></div>
         </div>
         <div class="result-box-container">
             <div class="result-box">
@@ -333,17 +333,16 @@
         function calculateResults() {
             // Récupérer les valeurs du formulaire
             const sexe = localStorage.getItem('sexe');
-            const age = document.getElementById('age').value;
-            const poids = document.getElementById('poids').value;
-            const taille = document.getElementById('taille').value;
+            const age = parseFloat(document.getElementById('age').value);
+            const poids = parseFloat(document.getElementById('poids').value);
+            const taille = parseFloat(document.getElementById('taille').value);
             const activite = document.getElementById('activite').value;
-            const objectif = document.getElementById('objectif').value;
+            const objectif = parseFloat(document.getElementById('objectif').value);
 
             // Calculer les résultats (exemples de calculs)
             const mb = Math.round(sexe === 'homme' ? 88.362 + (13.397 * poids) + (4.799 * taille) - (5.677 * age) : 447.593 + (9.247 * poids) + (3.098 * taille) - (4.330 * age));
             const maintien = Math.round(mb * (activite === 'sedentaire' ? 1.2 : activite === 'legerement_actif' ? 1.375 : activite === 'moderement_actif' ? 1.55 : activite === 'tres_actif' ? 1.725 : 1.9));
-            const deficit500 = Math.round(maintien - 500);
-            const imc = Math.round(poids / ((taille / 100) ** 2));
+            const imc = (poids / ((taille / 100) ** 2)).toFixed(1);
 
             // Calcul des pertes de poids
             const pertePoids1500 = ((maintien - 1500) * 90 / 7700).toFixed(1); // Calcul sur 3 mois
@@ -357,7 +356,7 @@
             // Afficher les résultats
             document.getElementById('mb').querySelector('strong').innerText = mb;
             document.getElementById('maintien').querySelector('strong').innerText = maintien;
-            document.getElementById('deficit').querySelector('strong').innerText = deficit500;
+            document.getElementById('imc').querySelector('strong').innerText = imc;
             document.getElementById('perte-1500').innerText = pertePoids1500;
             document.getElementById('perte-1400').innerText = pertePoids1400;
             document.getElementById('perte-1300').innerText = pertePoids1300;
@@ -377,3 +376,4 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
